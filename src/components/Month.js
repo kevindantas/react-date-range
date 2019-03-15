@@ -16,20 +16,17 @@ import {
   eachDayOfInterval,
 } from 'date-fns';
 import { getMonthDisplayRange } from '../utils';
+import { WeekDays, WeekDay, MonthWrapper, MonthName, Days } from './styles/Month.styled.js';
 
 function renderWeekdays(styles, dateOptions) {
   const now = new Date();
   return (
-    <div className={styles.weekDays}>
+    <WeekDays>
       {eachDayOfInterval({
         start: startOfWeek(now, dateOptions),
         end: endOfWeek(now, dateOptions),
-      }).map((day, i) => (
-        <span className={styles.weekDay} key={i}>
-          {format(day, 'ddd', dateOptions)}
-        </span>
-      ))}
-    </div>
+      }).map((day, i) => <WeekDay key={i}>{format(day, 'ddd', dateOptions)}</WeekDay>)}
+    </WeekDays>
   );
 }
 
@@ -54,14 +51,14 @@ class Month extends PureComponent {
     }
     const showPreview = this.props.showPreview && !drag.disablePreview;
     return (
-      <div className={styles.month} style={this.props.style}>
+      <MonthWrapper style={this.props.style}>
         {this.props.showMonthName ? (
-          <div className={styles.monthName}>
+          <MonthName>
             {format(this.props.month, this.props.monthDisplayFormat, this.props.dateOptions)}
-          </div>
+          </MonthName>
         ) : null}
         {this.props.showWeekDays && renderWeekdays(styles, this.props.dateOptions)}
-        <div className={styles.days} onMouseLeave={this.props.onMouseLeave}>
+        <Days onMouseLeave={this.props.onMouseLeave}>
           {eachDayOfInterval({ start: monthDisplay.start, end: monthDisplay.end }).map(
             (day, index) => {
               const isStartOfMonth = isSameDay(day, monthDisplay.startDateOfMonth);
@@ -101,8 +98,8 @@ class Month extends PureComponent {
               );
             }
           )}
-        </div>
-      </div>
+        </Days>
+      </MonthWrapper>
     );
   }
 }

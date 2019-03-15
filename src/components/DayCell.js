@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { startOfDay, format, isSameDay, isAfter, isBefore, endOfDay } from 'date-fns';
+import { DayNumber, Day } from './styles/DayCell.styled';
 
 class DayCell extends Component {
   constructor(props, context) {
@@ -76,13 +77,11 @@ class DayCell extends Component {
       isEndOfWeek,
       isStartOfMonth,
       isEndOfMonth,
-      disabled,
       styles,
     } = this.props;
 
     return classnames(styles.day, {
       [styles.dayPassive]: isPassive,
-      [styles.dayDisabled]: disabled,
       [styles.dayToday]: isToday,
       [styles.dayWeekend]: isWeekend,
       [styles.dayStartOfWeek]: isStartOfWeek,
@@ -118,7 +117,7 @@ class DayCell extends Component {
     if (this.props.displayMode === 'date') {
       let isSelected = isSameDay(this.props.day, this.props.date);
       return isSelected ? (
-        <span className={styles.selected} style={{ color: this.props.color }} />
+        <span className={styles.selected} data="teste" style={{ color: this.props.color }} />
       ) : null;
     }
 
@@ -161,10 +160,11 @@ class DayCell extends Component {
     ));
   }
   render() {
-    const { styles } = this.props;
+    const { disabled, styles } = this.props;
     return (
-      <button
+      <Day
         type="button"
+        disabled={disabled}
         onMouseEnter={this.handleMouseEvent}
         onMouseLeave={this.handleMouseEvent}
         onFocus={this.handleMouseEvent}
@@ -179,10 +179,10 @@ class DayCell extends Component {
         style={{ color: this.props.color }}>
         {this.renderSelectionPlaceholders()}
         {this.renderPreviewPlaceholder()}
-        <span className={styles.dayNumber}>
+        <DayNumber className={styles.dayNumber}>
           <span>{format(this.props.day, 'D')}</span>
-        </span>
-      </button>
+        </DayNumber>
+      </Day>
     );
   }
 }

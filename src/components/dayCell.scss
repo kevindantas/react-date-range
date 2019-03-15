@@ -1,11 +1,3 @@
-.rdrDay {
-  box-sizing: inherit;
-  width: calc(100% / 7);
-  position: relative;
-  font: inherit;
-  cursor: pointer;
-}
-
 .rdrDayNumber {
   display: block;
   position: relative;
@@ -14,21 +6,10 @@
   }
 }
 
-.rdrDayDisabled {
-  cursor: not-allowed;
-}
-
-
 .rdrSelected, .rdrInRange, .rdrStartEdge, .rdrEndEdge{
   pointer-events: none;
 }
 
-.rdrInRange{}
-
 .rdrDayStartPreview, .rdrDayInPreview, .rdrDayEndPreview{
   pointer-events: none;
 }
-
-.rdrDayHovered{}
-
-.rdrDayActive{}

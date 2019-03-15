@@ -4,6 +4,15 @@ import styles from '../styles';
 import { defaultInputRanges, defaultStaticRanges } from '../defaultRanges';
 import { rangeShape } from './DayCell';
 import cx from 'classnames';
+import {
+  InputRanges,
+  InputRange,
+  InputRangeInput,
+  StaticRanges,
+  StaticRange,
+  StaticRangeLabel,
+  DefinedRangesWrapper,
+} from './styles/DefinedRange.styled';
 
 class DefinedRanges extends Component {
   constructor(props) {
@@ -37,9 +46,9 @@ class DefinedRanges extends Component {
     const { onPreviewChange, ranges, renderStaticRangeLabel, rangeColors, className } = this.props;
 
     return (
-      <div className={cx(styles.definedRangesWrapper, className)}>
+      <DefinedRangesWrapper className={className}>
         {this.props.headerContent}
-        <div className={styles.staticRanges}>
+        <StaticRanges>
           {this.props.staticRanges.map((staticRange, i) => {
             const { selectedRange, focusedRangeIndex } = this.getSelectedRange(ranges, staticRange);
             let labelContent;
@@ -51,9 +60,9 @@ class DefinedRanges extends Component {
             }
 
             return (
-              <button
+              <StaticRange
                 type="button"
-                className={cx(styles.staticRange, {
+                className={cx({
                   [styles.staticRangeSelected]: Boolean(selectedRange),
                 })}
                 style={{
@@ -70,18 +79,15 @@ class DefinedRanges extends Component {
                 onMouseLeave={() => {
                   this.props.onPreviewChange && this.props.onPreviewChange();
                 }}>
-                <span tabIndex={-1} className={styles.staticRangeLabel}>
-                  {labelContent}
-                </span>
-              </button>
+                <StaticRangeLabel tabIndex={-1}>{labelContent}</StaticRangeLabel>
+              </StaticRange>
             );
           })}
-        </div>
-        <div className={styles.inputRanges}>
+        </StaticRanges>
+        <InputRanges>
           {this.props.inputRanges.map((rangeOption, i) => (
-            <div className={styles.inputRange} key={i}>
-              <input
-                className={styles.inputRangeInput}
+            <InputRange key={i}>
+              <InputRangeInput
                 onFocus={() => this.setState({ focusedInput: i, rangeOffset: 0 })}
                 onBlur={() => this.setState({ rangeOffset: 0 })}
                 onChange={e => {
@@ -98,11 +104,11 @@ class DefinedRanges extends Component {
                 }
               />
               <span className={styles.inputRangeLabel}>{rangeOption.label}</span>
-            </div>
+            </InputRange>
           ))}
-        </div>
+        </InputRanges>
         {this.props.footerContent}
-      </div>
+      </DefinedRangesWrapper>
     );
   }
 }

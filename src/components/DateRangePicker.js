@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import DateRange from './DateRange';
 import DefinedRange from './DefinedRange';
 import { findNextRangeIndex, generateStyles } from '../utils.js';
-import classnames from 'classnames';
 import coreStyles from '../styles';
+import { DateRangePickerWrapper } from './styles/DateRangePicker.styles';
 
 class DateRangePicker extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class DateRangePicker extends Component {
   render() {
     const { focusedRange } = this.state;
     return (
-      <div className={classnames(this.styles.dateRangePickerWrapper, this.props.className)}>
+      <DateRangePickerWrapper className={this.props.className}>
         <DefinedRange
           focusedRange={focusedRange}
           onPreviewChange={value => this.dateRange.updatePreview(value)}
@@ -32,7 +32,7 @@ class DateRangePicker extends Component {
           ref={t => (this.dateRange = t)}
           className={undefined}
         />
-      </div>
+      </DateRangePickerWrapper>
     );
   }
 }
