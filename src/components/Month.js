@@ -104,7 +104,9 @@ class Month extends PureComponent {
   }
 }
 
-Month.defaultProps = {};
+Month.defaultProps = {
+  disabledDates: [],
+};
 
 Month.propTypes = {
   style: PropTypes.object,
