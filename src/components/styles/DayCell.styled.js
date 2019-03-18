@@ -1,20 +1,22 @@
 import styled, { css } from 'styled-components';
 
 export const DayNumber = styled('span')`
-  outline: 0;
-  font-weight: 300;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  top: 5px;
-  bottom: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  span {
-    color: #1d2429;
+  && {
+    outline: 0;
+    font-weight: 300;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    top: 5px;
+    bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span {
+      color: #1d2429;
+    }
   }
 `;
 
