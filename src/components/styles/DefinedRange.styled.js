@@ -22,6 +22,7 @@ export const StaticRange = styled('button')`
   display: block;
   outline: 0;
   border-bottom: 1px solid #eff2f7;
+  font-size: inherit;
   padding: 0;
   background: #fff;
   &:hover,
