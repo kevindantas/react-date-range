@@ -4,7 +4,7 @@ const marginHorizontal = css`
   margin: 0 5px;
 `;
 
-export const CalendarWrapper = styled('div')`
+export const CalendarWrapper = styled.div`
   box-sizing: border-box;
   background: #ffffff;
   display: inline-flex;
@@ -14,7 +14,7 @@ export const CalendarWrapper = styled('div')`
   font-size: 12px;
 `;
 
-export const MonthAndYearWrapper = styled('div')`
+export const MonthAndYearWrapper = styled.div`
   box-sizing: inherit;
   display: flex;
   justify-content: space-between;
@@ -23,7 +23,7 @@ export const MonthAndYearWrapper = styled('div')`
   padding-top: 10px;
 `;
 
-export const MonthAndYearPickers = styled('span')`
+export const MonthAndYearPickers = styled.span`
   flex: 1 1 auto;
   display: flex;
   justify-content: center;
@@ -50,15 +50,15 @@ export const MonthAndYearPickers = styled('span')`
   }
 `;
 
-export const YearPicker = styled('span')`
+export const YearPicker = styled.span`
   ${marginHorizontal};
 `;
 
-export const MonthPicker = styled('span')`
+export const MonthPicker = styled.span`
   ${marginHorizontal};
 `;
 
-export const DateDisplay = styled('div')`
+export const DateDisplay = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: rgb(239, 242, 247);
@@ -76,12 +76,12 @@ const monthsHorizontal = css`
   }
 `;
 
-export const Months = styled('div')`
+export const Months = styled.div`
   display: flex;
   ${props => (props.direction === 'vertical' ? monthsVertical : monthsHorizontal)};
 `;
 
-export const InfiniteMonths = styled('div')`
+export const InfiniteMonths = styled.div`
   overflow: auto;
   ${props => (props.direction === 'vertical' ? monthsVertical : monthsHorizontal)};
 `;
@@ -96,7 +96,7 @@ const dateDisplayItemActive = css`
   }
 `;
 
-export const DateDisplayItem = styled('span')`
+export const DateDisplayItem = styled.span`
   flex: 1 1;
   width: 0;
   text-align: center;
@@ -146,7 +146,7 @@ const nextButton = css`
   }
 `;
 
-export const NavigationButton = styled('button')`
+export const NavigationButton = styled.button`
   box-sizing: inherit;
   cursor: pointer;
   outline: none;

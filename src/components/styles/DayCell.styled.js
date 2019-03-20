@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const DayNumber = styled('span')`
+export const DayNumber = styled.span`
   && {
     outline: 0;
     font-weight: 300;
@@ -40,7 +40,7 @@ const dayDisabled = css`
 `;
 
 // Day Cell
-export const Day = styled('button')`
+export const Day = styled.button`
   box-sizing: inherit;
   width: calc(100% / 7);
   position: relative;
