@@ -137,12 +137,6 @@
   right: 0px;
 }
 
-.rdrDefinedRangesWrapper{
-  .rdrStaticRangeSelected{
-    color: red !important;
-    font-weight: 600;
-  }
-}
 
 .rdrCalendarWrapper:not(.rdrDateRangeWrapper) .rdrDayHovered .rdrDayNumber:after{
   content: '';
