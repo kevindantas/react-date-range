@@ -14,30 +14,148 @@ export const DayNumber = styled('span')`
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  span {
+    color: #1d2429;
+  }
+`;
+
+const rangeStart = css`
+  border-top-left-radius: 1.333em;
+  border-bottom-left-radius: 1.333em;
+  border-left-width: 1px;
+  left: 0px;
+`;
+
+const rangeEnd = css`
+  border-top-right-radius: 1.333em;
+  border-bottom-right-radius: 1.333em;
+  border-right-width: 1px;
+  right: 0px;
+`;
+
+export const InRange = styled('span')`
+  background: currentColor;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  bottom: 5px;
+
+  ${({ isEndEdge }) => (isEndEdge ? rangeEnd : '')};
+  ${({ isStartEdge }) => (isStartEdge ? rangeStart : '')};
+
+  && ~ ${DayNumber} {
     span {
-      color: #1d2429;
+      color: #fff;
     }
+
+    &:after {
+      background: #fff;
+    }
+  }
+`;
+
+export const inPreview = css`
+  border: 0px solid currentColor;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+`;
+
+export const PreviewRange = styled('span')`
+  position: absolute;
+  top: 3px;
+  left: -6px;
+  right: -6px;
+  bottom: 3px;
+  z-index: 1;
+  pointer-events: none;
+  border-color: currentColor;
+
+  ${({ isInRange }) => (isInRange ? inPreview : '')};
+  ${({ isEndEdge }) => (isEndEdge ? rangeEnd : '')};
+  ${({ isStartEdge }) => (isStartEdge ? rangeStart : '')};
+`;
+
+/**
+ * Day "edges"
+ */
+const dayRangeStart = css`
+  ${InRange}, ${PreviewRange} {
+    ${rangeStart};
+  }
+`;
+
+const dayRangeEnd = css`
+  ${InRange}, ${PreviewRange} {
+    ${rangeEnd};
   }
 `;
 
 // Day States
 const dayDisabled = css`
-  background-color: rgb(248, 248, 248);
   cursor: not-allowed;
 
-  .rdrDayNumber span {
+  ${DayNumber} span {
     color: #aeb9bf;
   }
-  .rdrInRange,
-  .rdrStartEdge,
-  .rdrEndEdge,
-  .rdrSelected,
-  .rdrDayStartPreview,
-  .rdrDayInPreview,
-  .rdrDayEndPreview {
+
+  ${InRange} {
+    background-color: rgb(248, 248, 248);
+  }
+
+  ${InRange}, ${PreviewRange}, .rdrSelected {
     filter: grayscale(100%) opacity(60%);
   }
 `;
+
+const dayPassive = css`
+  pointer-events: none;
+  && ${DayNumber} span {
+    color: #d5dce0;
+  }
+
+  ${InRange}, ${PreviewRange}, .rdrSelected {
+    display: none;
+  }
+`;
+
+const dayToday = css`
+  ${DayNumber} {
+    font-weight: 500;
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 18px;
+      height: 2px;
+      border-radius: 2px;
+      background: #3d91ff;
+    }
+  }
+`;
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+const isToday = ({ isToday }) => (isToday ? dayToday : '');
+// const isActive = ({ isActive }) => (isActive ? dayActive : '');
+const isDisabled = ({ disabled }) => (disabled ? dayDisabled : '');
+const isPassive = ({ isPassive }) => (isPassive ? dayPassive : '');
+const isRangeEnd = ({ isEndOfWeek, isEndOfMonth }) =>
+  isEndOfWeek || isEndOfMonth ? dayRangeEnd : '';
+const isRangeStart = ({ isStartOfMonth, isStartOfWeek }) =>
+  isStartOfWeek || isStartOfMonth ? dayRangeStart : '';
 
 // Day Cell
 export const Day = styled('button')`
@@ -58,5 +176,9 @@ export const Day = styled('button')`
     outline: 0;
   }
 
-  ${props => (props.disabled ? dayDisabled : '')};
+  ${isRangeEnd};
+  ${isRangeStart};
+  ${isDisabled};
+  ${isToday};
+  ${isPassive};
 `;

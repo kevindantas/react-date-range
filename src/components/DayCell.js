@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { startOfDay, format, isSameDay, isAfter, isBefore, endOfDay } from 'date-fns';
-import { DayNumber, Day } from './styles/DayCell.styled';
+import { DayNumber, Day, InRange, PreviewRange } from './styles/DayCell.styled';
 
 class DayCell extends Component {
   constructor(props, context) {
@@ -97,17 +97,16 @@ class DayCell extends Component {
     if (!preview) return null;
     const startDate = preview.startDate ? endOfDay(preview.startDate) : null;
     const endDate = preview.endDate ? startOfDay(preview.endDate) : null;
+    const isStartEdge = isSameDay(day, startDate);
+    const isEndEdge = isSameDay(day, endDate);
     const isInRange =
-      (!startDate || isAfter(day, startDate)) && (!endDate || isBefore(day, endDate));
-    const isStartEdge = !isInRange && isSameDay(day, startDate);
-    const isEndEdge = !isInRange && isSameDay(day, endDate);
+      (isStartEdge || isAfter(day, startDate)) && (isEndEdge || isBefore(day, endDate));
     return (
-      <span
-        className={classnames({
-          [styles.dayStartPreview]: isStartEdge,
-          [styles.dayInPreview]: isInRange,
-          [styles.dayEndPreview]: isEndEdge,
-        })}
+      <PreviewRange
+        data-testid="preview-range"
+        isStartEdge={isStartEdge}
+        isEndEdge={isEndEdge}
+        isInRange={isInRange}
         style={{ color: preview.color }}
       />
     );
@@ -117,7 +116,7 @@ class DayCell extends Component {
     if (this.props.displayMode === 'date') {
       let isSelected = isSameDay(this.props.day, this.props.date);
       return isSelected ? (
-        <span className={styles.selected} data="teste" style={{ color: this.props.color }} />
+        <InRange className={styles.selected} data="teste" style={{ color: this.props.color }} />
       ) : null;
     }
 
@@ -148,21 +147,40 @@ class DayCell extends Component {
     }, []);
 
     return inRanges.map((range, i) => (
-      <span
+      <InRange
         key={i}
-        className={classnames({
-          [styles.startEdge]: range.isStartEdge,
-          [styles.endEdge]: range.isEndEdge,
-          [styles.inRange]: range.isInRange,
-        })}
+        data-testid="in-range"
+        isStartEdge={range.isStartEdge}
+        isEndEdge={range.isEndEdge}
+        isInRange={range.isInRange}
         style={{ color: range.color || this.props.color }}
       />
     ));
   }
   render() {
-    const { disabled, styles } = this.props;
+    const {
+      isPassive,
+      isToday,
+      isWeekend,
+      isStartOfWeek,
+      isEndOfWeek,
+      isStartOfMonth,
+      isEndOfMonth,
+      disabled,
+      styles,
+    } = this.props;
+    const { active, hover } = this.state;
     return (
       <Day
+        isHover={hover}
+        isToday={isToday}
+        isActive={active}
+        isPassive={isPassive}
+        isEndOfWeek={isEndOfWeek}
+        isEndOfMonth={isEndOfMonth}
+        isStartOfWeek={isStartOfWeek}
+        isStartOfMonth={isStartOfMonth}
+        data-testid="day"
         type="button"
         disabled={disabled}
         onMouseEnter={this.handleMouseEvent}
