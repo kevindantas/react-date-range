@@ -16,7 +16,7 @@ export const StaticRangeLabel = styled('span')`
 
 export const staticRangeSelected = css`
   ${StaticRangeLabel} {
-    background: #eff2f7;
+    font-weight: bold;
   }
 `;
 
@@ -29,11 +29,11 @@ export const StaticRange = styled('button')`
   font-size: inherit;
   padding: 0;
   background: #fff;
+  transition: background-color 0.2s ease-in;
   &:hover,
   &:focus {
-    ${staticRangeSelected};
+    background: #eff2f7;
   }
-  font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
   ${({ selected }) => (selected ? staticRangeSelected : '')};
 `;
 
