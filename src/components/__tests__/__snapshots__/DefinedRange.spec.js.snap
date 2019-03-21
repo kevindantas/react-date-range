@@ -1,0 +1,183 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The DefinedRange Component snapshots should render dynamic static label contents correctly 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.c4 {
+  display: block;
+  outline: 0;
+  line-height: 18px;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.c2 {
+  border: 0;
+  cursor: pointer;
+  display: block;
+  outline: 0;
+  border-bottom: 1px solid #eff2f7;
+  font-size: inherit;
+  padding: 0;
+  background: #fff;
+  font-weight: normal;
+}
+
+.c2:hover .c3,
+.c2:focus .c3 {
+  background: #eff2f7;
+}
+
+.c8:hover .c3,
+.c8:focus .c3 {
+  background: #eff2f7;
+}
+
+.c8 .c3 {
+  background: #eff2f7;
+}
+
+.c0 {
+  font-size: 12px;
+  width: 226px;
+  border-right: solid 1px #eff2f7;
+  background: #fff;
+}
+
+.c5 {
+  padding: 10px 0;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.c7 {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 4px;
+  text-align: center;
+  border: solid 1px rgb(222,231,235);
+  margin-right: 10px;
+  color: rgb(108,118,122);
+}
+
+.c7:focus,
+.c7:hover {
+  border-color: rgb(180,191,196);
+  outline: 0;
+  color: #333;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <button
+        class="c2"
+        type="button"
+      >
+        <span
+          class="c3 c4"
+          tabindex="-1"
+        >
+          <i
+            class="italic-label-content"
+          >
+            Italic Content
+          </i>
+        </span>
+      </button>
+      <button
+        class="c2"
+        type="button"
+      >
+        <span
+          class="c3 c4"
+          tabindex="-1"
+        >
+          Static Label
+        </span>
+      </button>
+      <button
+        class="c2"
+        type="button"
+      >
+        <span
+          class="c3 c4"
+          tabindex="-1"
+        >
+          <img
+            class="random-image"
+          />
+        </span>
+      </button>
+      <button
+        class="c2"
+        type="button"
+      >
+        <span
+          class="c3 c4"
+          tabindex="-1"
+        >
+          <b
+            class="bold-label-content"
+          >
+            Bold Content
+          </b>
+        </span>
+      </button>
+    </div>
+    <div
+      class="c5"
+    >
+      <label
+        class="c6"
+      >
+        <input
+          class="c7"
+          max="99999"
+          min="0"
+          value="-"
+        />
+        <span>
+          days up to today
+        </span>
+      </label>
+      <label
+        class="c6"
+      >
+        <input
+          class="c7"
+          max="99999"
+          min="0"
+          value="-"
+        />
+        <span>
+          days starting today
+        </span>
+      </label>
+    </div>
+  </div>
+</div>
+`;

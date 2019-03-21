@@ -62,9 +62,7 @@ class DefinedRanges extends Component {
             return (
               <StaticRange
                 type="button"
-                className={cx({
-                  [styles.staticRangeSelected]: Boolean(selectedRange),
-                })}
+                selected={Boolean(selectedRange)}
                 style={{
                   color: selectedRange
                     ? selectedRange.color || rangeColors[focusedRangeIndex]
