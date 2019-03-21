@@ -174,7 +174,14 @@ class Calendar extends PureComponent {
     }
   }
   renderMonthAndYear(focusedDate, changeShownDate, props) {
-    const { showMonthArrow, locale, minDate, maxDate, showMonthAndYearPickers } = props;
+    const {
+      buttonsText,
+      showMonthArrow,
+      locale,
+      minDate,
+      maxDate,
+      showMonthAndYearPickers,
+    } = props;
     const upperYearLimit = (maxDate || Calendar.defaultProps.maxDate).getFullYear();
     const lowerYearLimit = (minDate || Calendar.defaultProps.minDate).getFullYear();
     const styles = this.styles;
@@ -183,6 +190,7 @@ class Calendar extends PureComponent {
         {showMonthArrow ? (
           <NavigationButton
             type="button"
+            title={buttonsText.prev}
             actionType="prev"
             onClick={() => changeShownDate(-1, 'monthOffset')}>
             <i />
@@ -228,6 +236,7 @@ class Calendar extends PureComponent {
           <NavigationButton
             type="button"
             actionType="next"
+            title={buttonsText.next}
             onClick={() => changeShownDate(+1, 'monthOffset')}>
             <i />
           </NavigationButton>
@@ -379,6 +388,7 @@ class Calendar extends PureComponent {
           <div>
             {isVertical && this.renderWeekdays(this.dateOptions)}
             <InfiniteMonths
+              data-testid="infinite-months"
               direction={direction}
               onMouseLeave={() => onPreviewChange && onPreviewChange()}
               style={{
@@ -461,6 +471,10 @@ class Calendar extends PureComponent {
 }
 
 Calendar.defaultProps = {
+  buttonsText: {
+    next: 'Next',
+    prev: 'Previous',
+  },
   showMonthArrow: true,
   showMonthAndYearPickers: true,
   disabledDates: [],
@@ -486,6 +500,10 @@ Calendar.defaultProps = {
 };
 
 Calendar.propTypes = {
+  buttonsText: PropTypes.shape({
+    prev: PropTypes.string,
+    next: PropTypes.string,
+  }),
   showMonthArrow: PropTypes.bool,
   showMonthAndYearPickers: PropTypes.bool,
   disabledDates: PropTypes.array,
