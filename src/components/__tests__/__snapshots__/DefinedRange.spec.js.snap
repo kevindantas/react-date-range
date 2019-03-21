@@ -28,21 +28,17 @@ exports[`The DefinedRange Component snapshots should render dynamic static label
   font-size: inherit;
   padding: 0;
   background: #fff;
-  font-weight: normal;
+  -webkit-transition: background-color 0.2s ease-in;
+  transition: background-color 0.2s ease-in;
 }
 
-.c2:hover .c3,
-.c2:focus .c3 {
-  background: #eff2f7;
-}
-
-.c8:hover .c3,
-.c8:focus .c3 {
+.c2:hover,
+.c2:focus {
   background: #eff2f7;
 }
 
 .c8 .c3 {
-  background: #eff2f7;
+  font-weight: bold;
 }
 
 .c0 {

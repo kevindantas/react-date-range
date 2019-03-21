@@ -138,6 +138,36 @@ describe('The DefinedRange Component', () => {
     });
   });
 
+  describe('preview range', () => {
+    const selectedRange = defaultStaticRanges[1];
+    const mockPreviewChange = jest.fn();
+
+    afterEach(() => {
+      jest.resetAllMocks();
+    });
+
+    it('should call onPreviewChange on focus', () => {
+      const { getByText } = render(<DefinedRange onPreviewChange={mockPreviewChange} />);
+      const selectedStaticRange = getByText(selectedRange.label);
+      fireEvent.focus(selectedStaticRange);
+      expect(mockPreviewChange).toHaveBeenCalledWith(selectedRange.range());
+    });
+
+    it('should call onPreviewChange on mouseover', () => {
+      const { getByText } = render(<DefinedRange onPreviewChange={mockPreviewChange} />);
+      const selectedStaticRange = getByText(selectedRange.label);
+      fireEvent.mouseOver(selectedStaticRange);
+      expect(mockPreviewChange).toHaveBeenCalledWith(selectedRange.range());
+    });
+
+    it("should call onPreviewChange on mouseleave and don't return selection range", () => {
+      const { getByText } = render(<DefinedRange onPreviewChange={mockPreviewChange} />);
+      const selectedStaticRange = getByText(selectedRange.label);
+      fireEvent.mouseLeave(selectedStaticRange);
+      expect(mockPreviewChange).toHaveBeenCalledWith();
+    });
+  });
+
   describe('snapshots', () => {
     it('should render dynamic static label contents correctly', () => {
       const renderItalicLabelContent = () => (
