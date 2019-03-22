@@ -25,14 +25,14 @@ const rangeStart = css`
   border-top-left-radius: 1.333em;
   border-bottom-left-radius: 1.333em;
   border-left-width: 1px;
-  left: 0px;
+  left: 2px;
 `;
 
 const rangeEnd = css`
   border-top-right-radius: 1.333em;
   border-bottom-right-radius: 1.333em;
   border-right-width: 1px;
-  right: 0px;
+  right: 2px;
 `;
 
 export const InRange = styled('span')`
@@ -46,7 +46,7 @@ export const InRange = styled('span')`
   ${({ isEndEdge }) => (isEndEdge ? rangeEnd : '')};
   ${({ isStartEdge }) => (isStartEdge ? rangeStart : '')};
 
-  && ~ ${DayNumber} {
+  & ~ ${DayNumber} {
     span {
       color: #fff;
     }
@@ -64,14 +64,16 @@ export const inPreview = css`
 `;
 
 export const PreviewRange = styled('span')`
-  position: absolute;
-  top: 3px;
-  left: -6px;
-  right: -6px;
-  bottom: 3px;
-  z-index: 1;
-  pointer-events: none;
-  border-color: currentColor;
+  & {
+    position: absolute;
+    top: 3px;
+    left: 0px;
+    right: 0px;
+    bottom: 3px;
+    z-index: 1;
+    pointer-events: none;
+    border-color: currentColor;
+  }
 
   ${({ isInRange }) => (isInRange ? inPreview : '')};
   ${({ isEndEdge }) => (isEndEdge ? rangeEnd : '')};
@@ -79,11 +81,15 @@ export const PreviewRange = styled('span')`
 `;
 
 /**
- * Day "edges"
+ * Week "edges"
  */
 const dayRangeStart = css`
   ${InRange}, ${PreviewRange} {
     ${rangeStart};
+  }
+
+  ${PreviewRange} {
+    left: 0;
   }
 `;
 
@@ -91,11 +97,16 @@ const dayRangeEnd = css`
   ${InRange}, ${PreviewRange} {
     ${rangeEnd};
   }
+
+  ${PreviewRange} {
+    right: 0;
+  }
 `;
 
 // Day States
 const dayDisabled = css`
   cursor: not-allowed;
+  background: rgb(248, 248, 248);
 
   ${DayNumber} span {
     color: #aeb9bf;
@@ -138,16 +149,7 @@ const dayToday = css`
   }
 `;
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+// Get day variations
 const isToday = ({ isToday }) => (isToday ? dayToday : '');
 // const isActive = ({ isActive }) => (isActive ? dayActive : '');
 const isDisabled = ({ disabled }) => (disabled ? dayDisabled : '');
