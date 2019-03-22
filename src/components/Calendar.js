@@ -34,7 +34,7 @@ import {
   CalendarWrapper,
   MonthPicker,
   Months,
-  InfiniteMonths,
+  InfiniteMonthsWrapper,
   NavigationButton,
   DateDisplayItem,
 } from './styles/Calendar.styled.js';
@@ -387,7 +387,7 @@ class Calendar extends PureComponent {
         {scroll.enabled ? (
           <div>
             {isVertical && this.renderWeekdays(this.dateOptions)}
-            <InfiniteMonths
+            <InfiniteMonthsWrapper
               data-testid="infinite-months"
               direction={direction}
               onMouseLeave={() => onPreviewChange && onPreviewChange()}
@@ -436,7 +436,7 @@ class Calendar extends PureComponent {
                   );
                 }}
               />
-            </InfiniteMonths>
+            </InfiniteMonthsWrapper>
           </div>
         ) : (
           <Months direction={direction}>

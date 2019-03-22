@@ -81,7 +81,7 @@ export const Months = styled.div`
   ${props => (props.direction === 'vertical' ? monthsVertical : monthsHorizontal)};
 `;
 
-export const InfiniteMonths = styled.div`
+export const InfiniteMonthsWrapper = styled.div`
   overflow: auto;
   ${props => (props.direction === 'vertical' ? monthsVertical : monthsHorizontal)};
 `;
