@@ -41,7 +41,7 @@ describe('The DayCell Component', () => {
     });
 
     it('should not call onPreviewChange with the day when disabled', () => {
-      const { getByTestId, debug } = render(
+      const { getByTestId } = render(
         <DayCell {...props} disabled onPreviewChange={mockPreviewChange} />
       );
       fireEvent.mouseEnter(getByTestId('day'));

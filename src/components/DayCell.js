@@ -93,7 +93,7 @@ class DayCell extends Component {
     });
   }
   renderPreviewPlaceholder() {
-    const { preview, day, styles } = this.props;
+    const { preview, day } = this.props;
     if (!preview) return null;
     const startDate = preview.startDate ? endOfDay(preview.startDate) : null;
     const endDate = preview.endDate ? startOfDay(preview.endDate) : null;
@@ -175,6 +175,7 @@ class DayCell extends Component {
         isHover={hover}
         isToday={isToday}
         isActive={active}
+        isWeekend={isWeekend}
         isPassive={isPassive}
         isEndOfWeek={isEndOfWeek}
         isEndOfMonth={isEndOfMonth}
