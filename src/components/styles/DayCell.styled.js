@@ -50,10 +50,6 @@ export const InRange = styled('span')`
     span {
       color: #fff;
     }
-
-    &:after {
-      background: #fff;
-    }
   }
 `;
 
@@ -146,6 +142,10 @@ const dayToday = css`
       border-radius: 2px;
       background: #3d91ff;
     }
+  }
+
+  ${InRange} ~ ${DayNumber}:after {
+    background: #fff;
   }
 `;
 
