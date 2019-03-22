@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const DayNumber = styled('span')`
+export const DayNumber = styled.span`
   && {
     outline: 0;
     font-weight: 300;
@@ -160,7 +160,7 @@ const isRangeStart = ({ isStartOfMonth, isStartOfWeek }) =>
   isStartOfWeek || isStartOfMonth ? dayRangeStart : '';
 
 // Day Cell
-export const Day = styled('button')`
+export const Day = styled.button`
   box-sizing: inherit;
   width: calc(100% / 7);
   position: relative;

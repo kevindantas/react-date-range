@@ -1,12 +1,12 @@
 import styled, { css } from 'styled-components';
 
 // Static Ranges
-export const StaticRanges = styled('div')`
+export const StaticRanges = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const StaticRangeLabel = styled('span')`
+export const StaticRangeLabel = styled.span`
   display: block;
   outline: 0;
   line-height: 18px;
@@ -20,7 +20,7 @@ export const staticRangeSelected = css`
   }
 `;
 
-export const StaticRange = styled('button')`
+export const StaticRange = styled.button`
   border: 0;
   cursor: pointer;
   display: block;
@@ -37,7 +37,7 @@ export const StaticRange = styled('button')`
   ${({ selected }) => (selected ? staticRangeSelected : '')};
 `;
 
-export const DefinedRangesWrapper = styled('div')`
+export const DefinedRangesWrapper = styled.div`
   font-size: 12px;
   width: 226px;
   border-right: solid 1px #eff2f7;
@@ -45,17 +45,17 @@ export const DefinedRangesWrapper = styled('div')`
 `;
 
 // Input ranges
-export const InputRanges = styled('div')`
+export const InputRanges = styled.div`
   padding: 10px 0;
 `;
 
-export const InputRange = styled('label')`
+export const InputRange = styled.label`
   display: flex;
   align-items: center;
   padding: 5px 20px;
 `;
 
-export const InputRangeInput = styled('input')`
+export const InputRangeInput = styled.input`
   width: 30px;
   height: 30px;
   line-height: 30px;
