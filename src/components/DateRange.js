@@ -115,6 +115,14 @@ class DateRange extends Component {
   }
 
   render() {
+    const { narrow, ...props } = this.props;
+    let { direction, months, scroll } = props;
+    if (narrow) {
+      direction = 'vertical';
+      months = 1;
+      scroll = { enabled: true };
+    }
+
     return (
       <Calendar
         focusedRange={this.state.focusedRange}
@@ -123,7 +131,10 @@ class DateRange extends Component {
         onPreviewChange={value => {
           this.updatePreview(value ? this.calcNewSelection(value) : null);
         }}
-        {...this.props}
+        {...props}
+        months={months}
+        scroll={scroll}
+        direction={direction}
         displayMode="dateRange"
         className={this.props.className}
         onChange={this.setSelection}
@@ -146,6 +157,7 @@ DateRange.defaultProps = {
 
 DateRange.propTypes = {
   ...Calendar.propTypes,
+  narrow: PropTypes.bool,
   onChange: PropTypes.func,
   onRangeFocusChange: PropTypes.func,
   className: PropTypes.string,

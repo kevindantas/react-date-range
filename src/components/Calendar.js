@@ -410,7 +410,7 @@ Calendar.defaultProps = {
   focusedRange: [0, 0],
   dateDisplayFormat: 'MMM D, YYYY',
   monthDisplayFormat: 'MMM YYYY',
-  showDateDisplay: true,
+  showDateDisplay: false,
   showPreview: true,
   displayMode: 'date',
   months: 1,

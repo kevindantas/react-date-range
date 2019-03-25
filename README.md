@@ -101,6 +101,7 @@ Property                             | type      | Default Value    | Desctiptio
 -------------------------------------|-----------|------------------|-----------------------------------------------------------------
 locale                               | Object    | enUS from locale | you can view full list from [here](https://github.com/Adphorus/react-date-range/tree/next/src/locale/index.js). Locales directly exported from [`date-fns/locales`](https://date-fns.org/v2.0.0-alpha.7/docs/I18n#supported-languages).
 className                            | String    |                  | wrapper classname
+narrow		                           | Boolean   |                  | Adjust layout for mobile
 months                               | Number    | 1                | rendered month count
 showSelectionPreview                 | Boolean   | true             | show preview on focused/hovered dates
 showMonthAndYearPickers              | Boolean   | true             | show select tags for month and year on calendar top, if false it will just display the month and year
@@ -119,7 +120,7 @@ onChange(Calendar)                   | Func      |                  | callback f
 onChange(DateRange)                  | Func      |                  | callback function for range changes. fn(changes). changes contains changed ranges with new `startDate`/`endDate` properties.
 color(Calendar)                      | String    | `#3d91ff`        | defines color for selected date in Calendar
 date(Calendar)                       | Date      |                  | date value for Calendar
-showDateDisplay(DateRange)           | Boolean   | true             | show/hide selection display row. Uses `dateDisplayFormat` for formatter
+showDateDisplay(DateRange)           | Boolean   | false            | show/hide selection display row. Uses `dateDisplayFormat` for formatter
 onShownDateChange(DateRange,Calendar)| Function  |                  | Callback function that is called when the shown date changes
 initialFocusedRange(DateRange)       | Object    |                  | Initial value for focused range. See `focusedRange` for usage.
 focusedRange(DateRange)              | Object    |                  | It defines which range and step are focused. Common initial value is `[0, 0]`; first value is index of ranges, second one is which step on date range(startDate or endDate).
