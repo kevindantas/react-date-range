@@ -300,6 +300,15 @@ class Calendar extends PureComponent {
       ...range,
       color: range.color || rangeColors[i] || color,
     }));
+
+    const months = new Array(this.props.months).fill().map((_, i) => {
+      let month = i;
+      if (this.props.startOnPreviousMonth) {
+        month = i - this.props.months + 1;
+      }
+      return addMonths(this.state.focusedDate, month);
+    });
+
     return (
       <CalendarWrapper
         className={classnames(this.styles.calendarWrapper, this.props.className)}
@@ -365,29 +374,26 @@ class Calendar extends PureComponent {
           </div>
         ) : (
           <Months direction={direction}>
-            {new Array(this.props.months).fill(null).map((_, i) => {
-              const monthStep = addMonths(this.state.focusedDate, i);
-              return (
-                <Month
-                  {...this.props}
-                  onPreviewChange={this.props.onPreviewChange || this.updatePreview}
-                  preview={this.props.preview || this.state.preview}
-                  ranges={ranges}
-                  key={i}
-                  drag={this.state.drag}
-                  dateOptions={this.dateOptions}
-                  disabledDates={disabledDates}
-                  month={monthStep}
-                  onDragSelectionStart={this.onDragSelectionStart}
-                  onDragSelectionEnd={this.onDragSelectionEnd}
-                  onDragSelectionMove={this.onDragSelectionMove}
-                  onMouseLeave={() => onPreviewChange && onPreviewChange()}
-                  styles={this.styles}
-                  showWeekDays={!isVertical || i === 0}
-                  showMonthName={!isVertical || i > 0}
-                />
-              );
-            })}
+            {months.map((monthStep, i) => (
+              <Month
+                {...this.props}
+                onPreviewChange={this.props.onPreviewChange || this.updatePreview}
+                preview={this.props.preview || this.state.preview}
+                ranges={ranges}
+                key={i}
+                drag={this.state.drag}
+                dateOptions={this.dateOptions}
+                disabledDates={disabledDates}
+                month={monthStep}
+                onDragSelectionStart={this.onDragSelectionStart}
+                onDragSelectionEnd={this.onDragSelectionEnd}
+                onDragSelectionMove={this.onDragSelectionMove}
+                onMouseLeave={() => onPreviewChange && onPreviewChange()}
+                styles={this.styles}
+                showWeekDays={!isVertical || i === 0}
+                showMonthName={!isVertical || i > 0}
+              />
+            ))}
           </Months>
         )}
       </CalendarWrapper>
@@ -396,6 +402,7 @@ class Calendar extends PureComponent {
 }
 
 Calendar.defaultProps = {
+  startOnPreviousMonth: true,
   disabledDates: [],
   classNames: {},
   locale: defaultLocale,
@@ -424,6 +431,7 @@ Calendar.defaultProps = {
 };
 
 Calendar.propTypes = {
+  startOnPreviousMonth: PropTypes.bool,
   disabledDates: PropTypes.array,
   minDate: PropTypes.object,
   maxDate: PropTypes.object,

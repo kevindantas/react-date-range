@@ -12,6 +12,26 @@ describe('The Calendar Component', () => {
       const { queryByTestId } = render(<Calendar months={months} />);
       expect(queryByTestId('month').children).toHaveLength(months);
     });
+
+    it('should show the previous month by default', () => {
+      const { container, getByText } = render(<Calendar months={months} direction="horizontal" />);
+
+      const previousMonth = `${format(
+        subMonths(new Date(), 1),
+        'MMM'
+      )} ${new Date().getFullYear()}`;
+      expect(container).toContainElement(getByText(previousMonth));
+    });
+
+    it('should show the next month with startOnPreviousMonth=false', () => {
+      const nextMonth = `${format(addMonths(new Date(), 1), 'MMM')} ${new Date().getFullYear()}`;
+
+      const { container, getByText } = render(
+        <Calendar months={months} startOnPreviousMonth={false} direction="horizontal" />
+      );
+
+      expect(container).toContainElement(getByText(nextMonth));
+    });
   });
 
   describe('select dates', () => {
