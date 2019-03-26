@@ -302,11 +302,7 @@ class Calendar extends PureComponent {
     }));
 
     const months = new Array(this.props.months).fill().map((_, i) => {
-      let month = i;
-      if (this.props.startOnPreviousMonth) {
-        month = i - this.props.months + 1;
-      }
-      return addMonths(this.state.focusedDate, month);
+      return addMonths(this.state.focusedDate, i);
     });
 
     return (
