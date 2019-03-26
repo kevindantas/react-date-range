@@ -120,7 +120,7 @@ class DateRange extends Component {
         }}
         {...this.props}
         displayMode="dateRange"
-        className={classnames(this.styles.dateRangeWrapper, this.props.className)}
+        className={this.props.className}
         onChange={this.setSelection}
         updateRange={val => this.setSelection(val, false)}
         ref={target => {
