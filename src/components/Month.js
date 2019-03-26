@@ -51,7 +51,7 @@ class Month extends PureComponent {
     }
     const showPreview = this.props.showPreview && !drag.disablePreview;
     return (
-      <MonthWrapper style={this.props.style}>
+      <MonthWrapper data-testid="month" style={this.props.style}>
         {this.props.showMonthName ? (
           <MonthName>
             {format(this.props.month, this.props.monthDisplayFormat, this.props.dateOptions)}
@@ -104,7 +104,9 @@ class Month extends PureComponent {
   }
 }
 
-Month.defaultProps = {};
+Month.defaultProps = {
+  disabledDates: [],
+};
 
 Month.propTypes = {
   style: PropTypes.object,

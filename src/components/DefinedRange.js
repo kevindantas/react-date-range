@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styles from '../styles';
 import { defaultInputRanges, defaultStaticRanges } from '../defaultRanges';
 import { rangeShape } from './DayCell';
-import cx from 'classnames';
 import {
   InputRanges,
   InputRange,
@@ -62,9 +61,7 @@ class DefinedRanges extends Component {
             return (
               <StaticRange
                 type="button"
-                className={cx({
-                  [styles.staticRangeSelected]: Boolean(selectedRange),
-                })}
+                selected={Boolean(selectedRange)}
                 style={{
                   color: selectedRange
                     ? selectedRange.color || rangeColors[focusedRangeIndex]

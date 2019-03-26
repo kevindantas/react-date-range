@@ -27,18 +27,14 @@ import {
 import defaultLocale from 'date-fns/locale/en-US';
 import coreStyles from '../styles';
 import {
-  MonthAndYearWrapper,
-  MonthAndYearPickers,
-  YearPicker,
   DateDisplay,
   CalendarWrapper,
-  MonthPicker,
   Months,
-  InfiniteMonths,
-  NavigationButton,
+  InfiniteMonthsWrapper,
   DateDisplayItem,
 } from './styles/Calendar.styled.js';
 import { WeekDays, WeekDay } from './styles/Month.styled.js';
+import MonthAndYearPicker from './MonthAndYearPicker.js';
 
 class Calendar extends PureComponent {
   constructor(props, context) {
@@ -51,7 +47,6 @@ class Calendar extends PureComponent {
     this.onDragSelectionStart = this.onDragSelectionStart.bind(this);
     this.onDragSelectionEnd = this.onDragSelectionEnd.bind(this);
     this.onDragSelectionMove = this.onDragSelectionMove.bind(this);
-    this.renderMonthAndYear = this.renderMonthAndYear.bind(this);
     this.updatePreview = this.updatePreview.bind(this);
     this.estimateMonthSize = this.estimateMonthSize.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -173,68 +168,7 @@ class Calendar extends PureComponent {
       onShownDateChange && onShownDateChange(visibleMonth);
     }
   }
-  renderMonthAndYear(focusedDate, changeShownDate, props) {
-    const { showMonthArrow, locale, minDate, maxDate, showMonthAndYearPickers } = props;
-    const upperYearLimit = (maxDate || Calendar.defaultProps.maxDate).getFullYear();
-    const lowerYearLimit = (minDate || Calendar.defaultProps.minDate).getFullYear();
-    const styles = this.styles;
-    return (
-      <MonthAndYearWrapper onMouseUp={e => e.stopPropagation()}>
-        {showMonthArrow ? (
-          <NavigationButton
-            type="button"
-            actionType="prev"
-            onClick={() => changeShownDate(-1, 'monthOffset')}>
-            <i />
-          </NavigationButton>
-        ) : null}
-        {showMonthAndYearPickers ? (
-          <MonthAndYearPickers>
-            <MonthPicker>
-              <select
-                value={focusedDate.getMonth()}
-                onChange={e => changeShownDate(e.target.value, 'setMonth')}>
-                {locale.localize.months().map((month, i) => (
-                  <option key={i} value={i}>
-                    {month}
-                  </option>
-                ))}
-              </select>
-            </MonthPicker>
-            <span className={styles.monthAndYearDivider} />
-            <YearPicker>
-              <select
-                value={focusedDate.getFullYear()}
-                onChange={e => changeShownDate(e.target.value, 'setYear')}>
-                {new Array(upperYearLimit - lowerYearLimit + 1)
-                  .fill(upperYearLimit)
-                  .map((val, i) => {
-                    const year = val - i;
-                    return (
-                      <option key={year} value={year}>
-                        {year}
-                      </option>
-                    );
-                  })}
-              </select>
-            </YearPicker>
-          </MonthAndYearPickers>
-        ) : (
-          <MonthAndYearPickers>
-            {locale.localize.months()[focusedDate.getMonth()]} {focusedDate.getFullYear()}
-          </MonthAndYearPickers>
-        )}
-        {showMonthArrow ? (
-          <NavigationButton
-            type="button"
-            actionType="next"
-            onClick={() => changeShownDate(+1, 'monthOffset')}>
-            <i />
-          </NavigationButton>
-        ) : null}
-      </MonthAndYearWrapper>
-    );
-  }
+
   renderWeekdays() {
     const now = new Date();
     return (
@@ -357,10 +291,10 @@ class Calendar extends PureComponent {
       minDate,
       rangeColors,
       color,
+      navigatorRenderer,
     } = this.props;
     const { scrollArea, focusedDate } = this.state;
     const isVertical = direction === 'vertical';
-    const navigatorRenderer = this.props.navigatorRenderer || this.renderMonthAndYear;
 
     const ranges = this.props.ranges.map((range, i) => ({
       ...range,
@@ -378,7 +312,8 @@ class Calendar extends PureComponent {
         {scroll.enabled ? (
           <div>
             {isVertical && this.renderWeekdays(this.dateOptions)}
-            <InfiniteMonths
+            <InfiniteMonthsWrapper
+              data-testid="infinite-months"
               direction={direction}
               onMouseLeave={() => onPreviewChange && onPreviewChange()}
               style={{
@@ -426,7 +361,7 @@ class Calendar extends PureComponent {
                   );
                 }}
               />
-            </InfiniteMonths>
+            </InfiniteMonthsWrapper>
           </div>
         ) : (
           <Months direction={direction}>
@@ -461,8 +396,6 @@ class Calendar extends PureComponent {
 }
 
 Calendar.defaultProps = {
-  showMonthArrow: true,
-  showMonthAndYearPickers: true,
   disabledDates: [],
   classNames: {},
   locale: defaultLocale,
@@ -483,11 +416,14 @@ Calendar.defaultProps = {
   minDate: addYears(new Date(), -100),
   rangeColors: ['#3d91ff', '#3ecf8e', '#fed14c'],
   dragSelectionEnabled: true,
+  navigatorRenderer(focusedDate, changeShownDate, props) {
+    return (
+      <MonthAndYearPicker {...props} focusedDate={focusedDate} changeShownDate={changeShownDate} />
+    );
+  },
 };
 
 Calendar.propTypes = {
-  showMonthArrow: PropTypes.bool,
-  showMonthAndYearPickers: PropTypes.bool,
   disabledDates: PropTypes.array,
   minDate: PropTypes.object,
   maxDate: PropTypes.object,

@@ -14,7 +14,11 @@ export const StaticRangeLabel = styled.span`
   text-align: left;
 `;
 
-const staticRangeSelected = css``;
+export const staticRangeSelected = css`
+  ${StaticRangeLabel} {
+    font-weight: bold;
+  }
+`;
 
 export const StaticRange = styled.button`
   border: 0;
@@ -25,12 +29,12 @@ export const StaticRange = styled.button`
   font-size: inherit;
   padding: 0;
   background: #fff;
+  transition: background-color 0.2s ease-in;
   &:hover,
   &:focus {
-    .rdrStaticRangeLabel {
-      background: #eff2f7;
-    }
+    background: #eff2f7;
   }
+  ${({ selected }) => (selected ? staticRangeSelected : '')};
 `;
 
 export const DefinedRangesWrapper = styled.div`
@@ -38,10 +42,6 @@ export const DefinedRangesWrapper = styled.div`
   width: 226px;
   border-right: solid 1px #eff2f7;
   background: #fff;
-  ${staticRangeSelected} {
-    color: currentColor;
-    font-weight: 600;
-  }
 `;
 
 // Input ranges
@@ -49,7 +49,7 @@ export const InputRanges = styled.div`
   padding: 10px 0;
 `;
 
-export const InputRange = styled.div`
+export const InputRange = styled.label`
   display: flex;
   align-items: center;
   padding: 5px 20px;
