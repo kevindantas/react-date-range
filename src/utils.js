@@ -29,7 +29,7 @@ export function calcFocusDate(currentFocusedDate, props) {
   targetInterval.end = endOfMonth(targetInterval.end || targetInterval.start);
   let targetDate = targetInterval.start || targetInterval.end || shownDate || new Date();
 
-  if (props.startOnPreviousMonth) {
+  if (props.startOnPreviousMonth && props.months > 1) {
     targetDate = subMonths(targetDate, 1);
   }
 
