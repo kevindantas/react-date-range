@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { WeekDays } from './Month.styled';
 
 const marginHorizontal = css`
   margin: 0 5px;
@@ -82,8 +83,54 @@ export const Months = styled.div`
 `;
 
 export const InfiniteMonthsWrapper = styled.div`
+  position: relative;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    left: 0;
+    z-index: 10;
+  }
+
+  &:before {
+    background: linear-gradient(rgba(0, 0, 0, 0.08), transparent);
+    top: 2.667em; /* WeekDays height */
+  }
+
+  &:after {
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.08));
+    bottom: 0;
+  }
+`;
+
+export const InfiniteMonthsList = styled.div`
+  position: relative;
   overflow: auto;
   ${props => (props.direction === 'vertical' ? monthsVertical : monthsHorizontal)};
+
+  > div {
+    &:before,
+    &:after {
+      content: '';
+      height: 10px;
+      width: 100%;
+      left: 0;
+      position: absolute;
+      background: #fff;
+      z-index: 11;
+    }
+
+    &:before {
+      top: 0;
+    }
+
+    &:after {
+      bottom: 0;
+    }
+  }
 `;
 
 //

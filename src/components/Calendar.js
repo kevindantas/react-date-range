@@ -30,8 +30,9 @@ import {
   DateDisplay,
   CalendarWrapper,
   Months,
-  InfiniteMonthsWrapper,
+  InfiniteMonthsList,
   DateDisplayItem,
+  InfiniteMonthsWrapper,
 } from './styles/Calendar.styled.js';
 import { WeekDays, WeekDay } from './styles/Month.styled.js';
 import MonthAndYearPicker from './MonthAndYearPicker.js';
@@ -315,9 +316,9 @@ class Calendar extends PureComponent {
         {showDateDisplay && this.renderDateDisplay()}
         {navigatorRenderer(focusedDate, this.changeShownDate, this.props)}
         {scroll.enabled ? (
-          <div>
+          <InfiniteMonthsWrapper>
             {isVertical && this.renderWeekdays(this.dateOptions)}
-            <InfiniteMonthsWrapper
+            <InfiniteMonthsList
               data-testid="infinite-months"
               direction={direction}
               onMouseLeave={() => onPreviewChange && onPreviewChange()}
@@ -366,8 +367,8 @@ class Calendar extends PureComponent {
                   );
                 }}
               />
-            </InfiniteMonthsWrapper>
-          </div>
+            </InfiniteMonthsList>
+          </InfiniteMonthsWrapper>
         ) : (
           <Months direction={direction}>
             {months.map((monthStep, i) => (
