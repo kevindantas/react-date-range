@@ -16,12 +16,14 @@ class DateRangePicker extends Component {
     const { focusedRange } = this.state;
     return (
       <DateRangePickerWrapper className={this.props.className}>
-        <DefinedRange
-          focusedRange={focusedRange}
-          onPreviewChange={value => this.dateRange.updatePreview(value)}
-          {...this.props}
-          range={this.props.ranges[focusedRange[0]]}
-        />
+        {!this.props.narrow && (
+          <DefinedRange
+            focusedRange={focusedRange}
+            onPreviewChange={value => this.dateRange.updatePreview(value)}
+            {...this.props}
+            range={this.props.ranges[focusedRange[0]]}
+          />
+        )}
         <DateRange
           onRangeFocusChange={focusedRange => this.setState({ focusedRange })}
           focusedRange={focusedRange}
