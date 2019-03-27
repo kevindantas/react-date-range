@@ -6,6 +6,7 @@ import {
   endOfMonth,
   startOfWeek,
   endOfWeek,
+  subMonths,
 } from 'date-fns';
 
 export function calcFocusDate(currentFocusedDate, props) {
@@ -26,7 +27,11 @@ export function calcFocusDate(currentFocusedDate, props) {
   }
   targetInterval.start = startOfMonth(targetInterval.start || new Date());
   targetInterval.end = endOfMonth(targetInterval.end || targetInterval.start);
-  const targetDate = targetInterval.start || targetInterval.end || shownDate || new Date();
+  let targetDate = targetInterval.start || targetInterval.end || shownDate || new Date();
+
+  if (props.startOnPreviousMonth && props.months > 1) {
+    targetDate = subMonths(targetDate, 1);
+  }
 
   // initial focus
   if (!currentFocusedDate) return shownDate || targetDate;
