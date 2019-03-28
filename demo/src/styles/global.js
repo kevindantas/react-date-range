@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+const tableHeadColor = '#3e484f';
+
 export default createGlobalStyle`
   * {
     box-sizing: border-box;
@@ -16,6 +18,7 @@ export default createGlobalStyle`
     font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-weight: 300;
+    color: #455A64;
   }
 
   pre, code {
@@ -48,10 +51,12 @@ export default createGlobalStyle`
     border-collapse: collapse;
 
     thead {
-      background: #f3f3f3;
+      text-transform: capitalize;
 
       tr {
         border-bottom-width: 2px;
+        border-color: ${tableHeadColor};
+        color: ${tableHeadColor};
       }
     }
 
@@ -60,7 +65,7 @@ export default createGlobalStyle`
     }
 
     td, th {
-      padding: 1rem
+      padding: 1rem;
       text-align: left;
     }
   }
@@ -68,16 +73,19 @@ export default createGlobalStyle`
   .demo {
     background: #fafafa;
     text-align: center;
-    padding: 2rem;
+    padding: 0;
     border-radius: 7px;
     box-shadow: 1px 20px 20px rgba(41, 60, 74, 0.18);
     margin-bottom: 3rem;
+    display: block;
+    margin: 48px auto;
+    box-sizing: border-box;
     > div {
       margin: auto;
     }
   }
 
   h2 {
-    margin-top: 8rem;
+    margin-top: 7rem;
   }
 `;

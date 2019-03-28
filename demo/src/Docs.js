@@ -15,6 +15,7 @@ const Content = styled.div`
   grid-area: content;
 
   > div {
+    display: grid;
     width: 98%;
   }
 `;
