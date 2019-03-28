@@ -10,7 +10,7 @@ The date pickers are built on top of the `react-date-range` library.
   <DemoCalendar />
 </div>
 
-| Property                | type    | Default Value      | Desctiption                                                                                                                                                                                                                                |
+| Property                | type    | Default Value      | Description                                                                                                                                                                                                                                |
 | ----------------------- | ------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | locale                  | Object  | enUS from locale   | you can view full list from [here](https://github.com/kevindantas/react-date-range/tree/next/src/locale/index.js). Locales directly exported from [`date-fns/locales`](https://date-fns.org/v2.0.0-alpha.7/docs/I18n#supported-languages). |
 | className               | String  |                    | wrapper classname                                                                                                                                                                                                                          |
@@ -47,7 +47,7 @@ This component allows the `Calendar` to select a range of dates, so the props su
 
 ### API
 
-| Property                  | type                                | Default Value | Desctiption                                                                                                                                                                  |
+| Property                  | type                                | Default Value | Description                                                                                                                                                                  |
 | ------------------------- | ----------------------------------- | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ranges                    | \*Object[]                          | []            | Defines ranges. array of range object                                                                                                                                        |
 | onChange                  | \*Func                              |               | callback function for range changes. fn(changes). changes contains changed ranges with new `startDate`/`endDate` properties.                                                 |
@@ -79,7 +79,7 @@ This component allows the `Calendar` to select a range of dates, so the props su
   <CustomDefinedRange />
 </div>
 
-| Property               | type                    | Default Value                                                                                                 | Desctiption                                                                                                                                                                                                   |
+| Property               | type                    | Default Value                                                                                                 | Description                                                                                                                                                                                                   |
 | ---------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | renderStaticRangeLabel | `Function(staticRange)` | null                                                                                                          | Callback function to be triggered for the static range configurations that have `hasCustomRendering: true` on them. Instead of rendering `staticRange.label`, return value of this callback will be rendered. |
 | ranges                 | `RangeShape`            | null                                                                                                          | Ranges selected                                                                                                                                                                                               |
