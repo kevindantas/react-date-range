@@ -32,6 +32,10 @@ module.exports = {
         test: /\.s?css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.md$/,
+        use: ['raw-loader'],
+      },
     ],
   },
   plugins: [new HtmlWebpackPlugin({ template: path.resolve('demo/src/index.html') })],
