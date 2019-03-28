@@ -112,11 +112,11 @@ class DayCell extends Component {
     );
   }
   renderSelectionPlaceholders() {
-    const { styles, ranges, day } = this.props;
+    const { ranges, day } = this.props;
     if (this.props.displayMode === 'date') {
       let isSelected = isSameDay(this.props.day, this.props.date);
       return isSelected ? (
-        <InRange className={styles.selected} data="teste" style={{ color: this.props.color }} />
+        <InRange isStartEdge isEndEdge style={{ color: this.props.color }} />
       ) : null;
     }
 
