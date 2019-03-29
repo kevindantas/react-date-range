@@ -216,7 +216,8 @@ class Calendar extends PureComponent {
     );
   }
   onDragSelectionStart(date) {
-    const { onChange, dragSelectionEnabled } = this.props;
+    const { displayMode, onChange, dragSelectionEnabled } = this.props;
+    if (displayMode === 'date') return;
 
     if (dragSelectionEnabled) {
       this.setState({
@@ -303,11 +304,7 @@ class Calendar extends PureComponent {
     }));
 
     const months = new Array(this.props.months).fill().map((_, i) => {
-      let month = i;
-      if (this.props.startOnPreviousMonth) {
-        month = i - this.props.months + 1;
-      }
-      return addMonths(this.state.focusedDate, month);
+      return addMonths(this.state.focusedDate, i);
     });
 
     return (
@@ -405,7 +402,6 @@ class Calendar extends PureComponent {
 Calendar.defaultProps = {
   startOnPreviousMonth: true,
   disabledDates: [],
-  classNames: {},
   locale: defaultLocale,
   ranges: [],
   focusedRange: [0, 0],
@@ -419,7 +415,7 @@ Calendar.defaultProps = {
   scroll: {
     enabled: false,
   },
-  direction: 'vertical',
+  direction: 'horizontal',
   maxDate: addYears(new Date(), 20),
   minDate: addYears(new Date(), -100),
   rangeColors: ['#3d91ff', '#3ecf8e', '#fed14c'],
